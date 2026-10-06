@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meu Bolso</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F7F4;--card:#fff;--ink:#12241F;--mute:#6B7C76;--line:#E1E7E3;--in:#1B7A57;--out:#C2402F;--btn:#12241F;--btnt:#fff;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1A17;--card:#17262F;--ink:#E8F0EC;--mute:#8FA39B;--line:#25363A;--in:#4FC79A;--out:#F0806F;--btn:#E8F0EC;--btnt:#0F1A17}}
+:root[data-theme="dark"]{--bg:#0F1A17;--card:#17262F;--ink:#E8F0EC;--mute:#8FA39B;--line:#25363A;--in:#4FC79A;--out:#F0806F;--btn:#E8F0EC;--btnt:#0F1A17}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 Figtree,system-ui,sans-serif}
+main{max-width:480px;margin:0 auto;padding:16px 16px 110px}
+h1,.big{font-family:"Bricolage Grotesque",Figtree,sans-serif}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.nav b{font-size:18px;text-transform:capitalize}
+.nav button{background:none;border:1px solid var(--line);color:var(--ink);width:40px;height:40px;border-radius:50%;font-size:18px;cursor:pointer}
+.hero{padding:28px 0 20px}
+.hero small{color:var(--mute)}
+.big{font-size:52px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:4px 0 14px}
+.row{display:flex;gap:24px}
+.row div{flex:1}
+.row span{display:block;color:var(--mute);font-size:14px}
+.row strong{font-size:20px}
+.in{color:var(--in)}.out{color:var(--out)}
+section{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:16px}
+h2{font-size:16px;margin:0 0 12px}
+.cat{margin-bottom:12px}
+.cat:last-child{margin-bottom:0}
+.cat .l{display:flex;justify-content:space-between;font-size:14px}
+.bar{height:8px;background:var(--line);border-radius:4px;margin-top:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--out);border-radius:4px}
+.tx{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}
+.tx:first-of-type{border-top:0}
+.tx .m{flex:1;min-width:0}
+.tx .m b{display:block;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tx .m span{font-size:13px;color:var(--mute)}
+.tx button{background:none;border:0;color:var(--mute);font-size:20px;cursor:pointer;padding:4px 8px}
+.empty{color:var(--mute);text-align:center;padding:12px 0;margin:0}
+.add{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--btn);color:var(--btnt);border:0;border-radius:28px;padding:16px 28px;font:600 16px Figtree,sans-serif;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+#sheet{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:flex-end;justify-content:center;z-index:5}
+#sheet.open{display:flex}
+#sheet form{background:var(--card);width:100%;max-width:480px;border-radius:20px 20px 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px));display:grid;gap:12px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.seg button{padding:12px;border:1px solid var(--line);background:none;color:var(--ink);border-radius:12px;font:600 15px Figtree,sans-serif;cursor:pointer}
+.seg button.on{background:var(--btn);color:var(--btnt);border-color:var(--btn)}
+input,select{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:16px Figtree,sans-serif}
+.save{background:var(--btn);color:var(--btnt);border:0;border-radius:12px;padding:15px;font:600 16px Figtree,sans-serif;cursor:pointer}
+:root{--bg:#F1ECFF;--card:#fff;--ink:#1B1033;--mute:#6B5F8A;--line:#E3DAF7;--bd:#1B1033;--sh:#1B1033;--in:#0B8A5F;--out:#E5484D;--btn:#C6F432;--btnt:#1B1033;--hero:#2B1768;--pop:#C6F432}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#140B29;--card:#21153D;--ink:#F3EDFF;--mute:#A99BCB;--line:#33265A;--bd:#6A55A8;--sh:#000;--in:#4FE0A8;--out:#FF8A8F;--hero:#3A1F8C}}
+:root[data-theme="dark"]{--bg:#140B29;--card:#21153D;--ink:#F3EDFF;--mute:#A99BCB;--line:#33265A;--bd:#6A55A8;--sh:#000;--in:#4FE0A8;--out:#FF8A8F;--hero:#3A1F8C}
+body{background-image:radial-gradient(var(--line) 1.5px,transparent 1.5px);background-size:22px 22px}
+.logo{font-size:30px;margin:0 0 14px;letter-spacing:-.02em}
+.logo span{display:inline-block;transform:rotate(-12deg);margin-left:4px}
+.nav b{background:var(--card);border:2px solid var(--bd);border-radius:20px;padding:6px 18px;box-shadow:3px 3px 0 var(--sh)}
+.nav button{background:var(--card);border:2px solid var(--bd);box-shadow:2px 2px 0 var(--sh)}
+.hero{position:relative;background:var(--hero);color:#fff;border:2px solid var(--bd);border-radius:26px;padding:22px;margin:18px 0 4px;box-shadow:5px 5px 0 var(--sh)}
+.hero small,.hero .row span{color:rgba(255,255,255,.75)}
+.hero .big{color:#fff;font-size:54px}
+.hero .big.out{color:#FFA3A8}
+.hero .in{color:#7CF2C4}.hero .out{color:#FFA3A8}
+#mood{position:absolute;top:16px;right:16px;width:62px;height:62px;border-radius:50%;background:var(--pop);border:2px solid var(--bd);display:grid;place-items:center;font-size:32px;transform:rotate(8deg)}
+section{border:2px solid var(--bd);border-radius:22px;box-shadow:4px 4px 0 var(--sh)}
+h2{font-family:"Bricolage Grotesque",Figtree,sans-serif;font-size:19px}
+main section:nth-of-type(1) h2::before{content:"⚡ "}
+main section:nth-of-type(2) h2::before{content:"💸 "}
+main section:nth-of-type(3) h2::before{content:"🧾 "}
+main section:nth-of-type(4) h2::before{content:"🤖 "}
+.bar{height:12px;border:1.5px solid var(--bd);border-radius:8px;background:var(--card)}
+.bar i{background:linear-gradient(90deg,#FF9A62,var(--out))}
+.ic{font-style:normal;width:42px;height:42px;border-radius:14px;background:var(--line);display:grid;place-items:center;font-size:20px;flex:none}
+.add{border:2px solid var(--bd);box-shadow:4px 4px 0 var(--sh);font-size:17px}
+.add:active{transform:translateX(-50%) translate(3px,3px);box-shadow:1px 1px 0 var(--sh)}
+#sheet form{border:2px solid var(--bd);border-bottom:0}
+input,select{border:2px solid var(--bd);border-radius:14px}
+.seg button{border:2px solid var(--bd)}
+.seg button.on{background:var(--btn);color:var(--btnt)}
+.save{border:2px solid var(--bd);box-shadow:3px 3px 0 var(--sh)}
+#pace{font-weight:600}
+#pace.good{color:var(--in)}#pace.bad{color:var(--out)}
+#chart text{font:11px Figtree,sans-serif;fill:var(--mute)}
+#ia{display:none}
+#ia p.s{color:var(--mute);font-size:14px;margin:0 0 12px}
+#ia input{margin-bottom:10px}
+#iaOut{white-space:pre-wrap;margin-top:14px;line-height:1.6}
+#iaGo{width:100%}
+:focus-visible{outline:3px solid var(--in);outline-offset:2px}
+</style>
+</head>
+<body>
+<main>
+  <h1 class="logo">Meu Bolso <span>🐷</span></h1>
+  <div class="nav"><button id="prev" aria-label="Mês anterior">‹</button><b id="mes"></b><button id="next" aria-label="Próximo mês">›</button></div>
+  <div class="hero">
+    <small>Saldo do mês</small><span id="mood" aria-hidden="true">👋</span>
+    <div class="big" id="saldo"></div>
+    <div class="row"><div><span>Entradas</span><strong class="in" id="ent"></strong></div><div><span>Saídas</span><strong class="out" id="sai"></strong></div></div>
+  </div>
+  <section><h2>Ritmo do mês</h2><p id="pace" style="margin:0 0 12px"></p>
+    <svg id="chart" viewBox="0 0 300 150" width="100%" role="img" aria-label="Saldo dos últimos 6 meses"></svg></section>
+  <section><h2>Para onde foi o dinheiro</h2><div id="cats"></div></section>
+  <section><h2>Lançamentos</h2><div id="lista"></div></section>
+  <section id="ia"><h2>Conselheiro de gastos</h2>
+    <p class="s">A IA lê seus lançamentos do mês e sugere onde economizar.</p>
+    <input id="iaQ" placeholder="Sua meta ou pergunta (ex: quero juntar R$ 1.000 em 3 meses)" maxlength="120">
+    <button class="save" id="iaGo" type="button">Analisar meus gastos</button>
+    <div id="iaOut" aria-live="polite"></div>
+  </section>
+</main>
+<button class="add" id="abrir">+ Novo lançamento</button>
+<div id="sheet">
+  <form id="f">
+    <div class="seg"><button type="button" id="tOut" class="on">Saída</button><button type="button" id="tIn">Entrada</button></div>
+    <input id="v" inputmode="decimal" placeholder="Valor (ex: 45,90)" required>
+    <input id="d" placeholder="Descrição (ex: Mercado)" maxlength="40" required>
+    <select id="c"></select>
+    <div id="dtInfo" style="display:flex;justify-content:space-between;align-items:center;color:var(--mute);font-size:14px"><span id="dtTxt"></span><button type="button" id="dtMud" style="background:none;border:0;color:var(--in);font:600 14px Figtree,sans-serif;cursor:pointer;padding:4px 0">Mudar data</button></div>
+    <input id="dt" type="date" required style="display:none">
+    <button class="save" type="submit">Salvar lançamento</button>
+    <button class="seg-cancel" type="button" id="fechar" style="background:none;border:0;color:var(--mute);font:600 15px Figtree,sans-serif;cursor:pointer">Cancelar</button>
+  </form>
+</div>
+<script>
+const CATS={out:["Moradia","Mercado","Transporte","Lazer","Saúde","Contas","Outros"],in:["Salário","Extra","Outros"]};
+const KEY="meubolso:v1";
+const EMO={Moradia:"🏠",Mercado:"🛒",Transporte:"🚌",Lazer:"🎮",Saúde:"💊",Contas:"🧾",Outros:"✨",Salário:"💼",Extra:"🎁"};
+let tx=[],tipo="out",hoje=new Date(),mes=hoje.getFullYear()+"-"+String(hoje.getMonth()+1).padStart(2,"0");
+try{tx=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){tx=[]}
+const $=id=>document.getElementById(id);
+const brl=n=>n.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+function salvar(){try{localStorage.setItem(KEY,JSON.stringify(tx))}catch(e){}}
+function render(){
+  const [y,m]=mes.split("-").map(Number);
+  $("mes").textContent=new Date(y,m-1,1).toLocaleDateString("pt-BR",{month:"long",year:"numeric"});
+  const L=tx.filter(t=>t.date.startsWith(mes)).sort((a,b)=>b.date.localeCompare(a.date));
+  const ent=L.filter(t=>t.t=="in").reduce((s,t)=>s+t.v,0),sai=L.filter(t=>t.t=="out").reduce((s,t)=>s+t.v,0);
+  $("saldo").textContent=brl(ent-sai);$("saldo").className="big "+(ent-sai<0?"out":"");
+  $("ent").textContent=brl(ent);$("sai").textContent=brl(sai);
+  $("mood").textContent=!L.length?"👋":ent-sai<0?"😬":(ent>0&&ent-sai>ent*.3?"🤑":"😎");
+  const by={};L.filter(t=>t.t=="out").forEach(t=>by[t.c]=(by[t.c]||0)+t.v);
+  const cats=$("cats");cats.innerHTML="";
+  const ks=Object.keys(by).sort((a,b)=>by[b]-by[a]);
+  if(!ks.length){cats.innerHTML='<p class="empty">Nenhuma saída neste mês.</p>'}
+  ks.forEach(k=>{const d=document.createElement("div");d.className="cat";
+    d.innerHTML='<div class="l"><span></span><span>'+brl(by[k])+'</span></div><div class="bar"><i style="width:'+Math.round(by[k]/sai*100)+'%"></i></div>';
+    d.querySelector("span").textContent=(EMO[k]||"✨")+" "+k;cats.appendChild(d)});
+  const lista=$("lista");lista.innerHTML="";
+  if(!L.length){lista.innerHTML='<p class="empty">Toque em “Novo lançamento” para começar.</p>'}
+  L.forEach(t=>{const d=document.createElement("div");d.className="tx";
+    d.innerHTML='<i class="ic">'+(EMO[t.c]||"✨")+'</i><div class="m"><b></b><span></span></div><strong class="'+t.t+'">'+(t.t=="out"?"− ":"+ ")+brl(t.v)+'</strong><button aria-label="Apagar">×</button>';
+    d.querySelector("b").textContent=t.d;
+    d.querySelector("span").textContent=t.c+" · "+t.date.split("-").reverse().slice(0,2).join("/");
+    d.querySelector("button").onclick=()=>{tx=tx.filter(x=>x.id!==t.id);salvar();render()};
+    lista.appendChild(d)});
+  grafico();
+}
+function grafico(){
+  const [y,m]=mes.split("-").map(Number);
+  const soma=(k,t,ate)=>tx.filter(x=>x.date.startsWith(k)&&x.t==t&&(!ate||+x.date.slice(8,10)<=ate)).reduce((s,x)=>s+x.v,0);
+  const ms=[];
+  for(let i=5;i>=0;i--){const d=new Date(y,m-1-i,1),k=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");
+    const e=soma(k,"in"),s=soma(k,"out");
+    ms.push({k,l:d.toLocaleDateString("pt-BR",{month:"short"}).replace(".",""),v:e-s,tem:e+s>0})}
+  const max=Math.max(1,...ms.map(x=>Math.abs(x.v))),H=52,base=72;
+  const fmt=v=>(v<0?"−":"")+(Math.abs(v)>=1000?(Math.abs(v)/1000).toFixed(1).replace(".",",")+"k":Math.round(Math.abs(v)));
+  let s='<line x1="0" x2="300" y1="'+base+'" y2="'+base+'" stroke="var(--line)"/>';
+  ms.forEach((x,i)=>{const cx=25+i*50,sel=x.k===mes;
+    s+='<text x="'+cx+'" y="144" text-anchor="middle"'+(sel?' style="font-weight:700;fill:var(--ink)"':'')+'>'+x.l+'</text>';
+    if(!x.tem){s+='<text x="'+cx+'" y="'+(base-4)+'" text-anchor="middle">–</text>';return}
+    const h=Math.max(3,Math.abs(x.v)/max*H),pos=x.v>=0;
+    s+='<rect x="'+(cx-14)+'" y="'+(pos?base-h:base)+'" width="28" height="'+h+'" rx="4" style="fill:var('+(pos?"--in":"--out")+');opacity:'+(sel?1:.5)+'"/>';
+    s+='<text x="'+cx+'" y="'+(pos?base-h-4:base+h+12)+'" text-anchor="middle">'+fmt(x.v)+'</text>'});
+  $("chart").innerHTML=s;
+  const p=$("pace"),hoje2=new Date(),rk=hoje2.getFullYear()+"-"+String(hoje2.getMonth()+1).padStart(2,"0");
+  p.className="";
+  if(mes<rk){const v=ms[5].v;p.className=v>=0?"good":"bad";p.textContent=ms[5].tem?(v>=0?"Mês fechado no azul: sobraram ":"Mês fechado no vermelho: faltaram ")+brl(Math.abs(v))+".":"Sem lançamentos neste mês.";return}
+  if(mes>rk){p.textContent="Este mês ainda não começou.";return}
+  const dia=hoje2.getDate(),gasto=soma(mes,"out",dia);
+  const ant=ms.slice(0,5).filter(x=>soma(x.k,"out")>0);
+  if(!ant.length){p.textContent="Ainda não há meses anteriores para comparar o seu ritmo. Até o dia "+dia+" você gastou "+brl(gasto)+".";return}
+  const med=ant.reduce((s,x)=>s+soma(x.k,"out",dia),0)/ant.length;
+  const base2="Até o dia "+dia+" você gastou "+brl(gasto)+". Nos meses anteriores, nesta altura, a média era "+brl(med)+". ";
+  if(med<=0){p.textContent=base2;return}
+  const r=gasto/med,pc=Math.round(Math.abs(1-r)*100);
+  if(r<.9){p.className="good";p.textContent=base2+"Você começou bem: "+pc+"% abaixo do normal."}
+  else if(r>1.1){p.className="bad";p.textContent=base2+"Você começou acima do normal: "+pc+"% a mais. Vale segurar os gastos."}
+  else p.textContent=base2+"Você está no ritmo de sempre."
+}
+function setTipo(t){tipo=t;manual=false;$("tOut").className=t=="out"?"on":"";$("tIn").className=t=="in"?"on":"";
+  $("c").innerHTML=CATS[t].map(c=>'<option value="'+c+'">'+(EMO[c]||"")+" "+c+"</option>").join("")}
+function mover(n){const [y,m]=mes.split("-").map(Number);const d=new Date(y,m-1+n,1);
+  mes=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0");render()}
+$("prev").onclick=()=>mover(-1);$("next").onclick=()=>mover(1);
+$("tOut").onclick=()=>setTipo("out");$("tIn").onclick=()=>setTipo("in");
+$("abrir").onclick=()=>{setTipo("out");$("f").reset();
+  const n=new Date(),p2=x=>String(x).padStart(2,"0");
+  $("dt").value=n.getFullYear()+"-"+p2(n.getMonth()+1)+"-"+p2(n.getDate());
+  $("dtTxt").textContent="Hoje, "+n.toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long"});
+  $("dt").style.display="none";$("dtInfo").style.display="flex";
+  $("sheet").classList.add("open");$("v").focus()};
+const fechar=()=>$("sheet").classList.remove("open");
+$("fechar").onclick=fechar;
+$("dtMud").onclick=()=>{$("dtInfo").style.display="none";$("dt").style.display="block";$("dt").focus()};
+$("sheet").onclick=e=>{if(e.target.id=="sheet")fechar()};
+$("f").onsubmit=e=>{e.preventDefault();
+  const v=parseFloat($("v").value.replace(/\./g,"").replace(",","."));
+  if(!(v>0)){$("v").setCustomValidity("Digite um valor maior que zero");$("v").reportValidity();return}
+  $("v").setCustomValidity("");
+  tx.push({id:Date.now(),t:tipo,v:v,d:$("d").value.trim(),c:$("c").value,date:$("dt").value});
+  salvar();mes=$("dt").value.slice(0,7);fechar();render()};
+$("v").oninput=()=>$("v").setCustomValidity("");
+let sample=null,ctl=null,manual=false;
+(async()=>{try{sample=await claude.use("sample")}catch(e){sample=null}
+  if(sample)$("ia").style.display="block"})();
+$("iaGo").onclick=async()=>{
+  if(!sample)return;
+  const L=tx.filter(t=>t.date.startsWith(mes));
+  const out=$("iaOut");
+  if(!L.length){out.textContent="Lance alguns gastos neste mês para eu poder analisar.";return}
+  const [y,m]=mes.split("-").map(Number),pm=new Date(y,m-2,1);
+  const pk=pm.getFullYear()+"-"+String(pm.getMonth()+1).padStart(2,"0");
+  const tot=(k,t)=>tx.filter(x=>x.date.startsWith(k)&&x.t==t).reduce((s,x)=>s+x.v,0);
+  const dados=L.map(t=>t.date+" | "+(t.t=="in"?"entrada":"saída")+" | "+t.c+" | "+t.d+" | R$ "+t.v.toFixed(2)).join("\n");
+  const pergunta=$("iaQ").value.trim();
+  const prompt="Você é um consultor de finanças pessoais brasileiro, simpático e direto. Analise os lançamentos do mês "+mes+" abaixo (data | tipo | categoria | descrição | valor).\n\n"+dados+
+    "\n\nMês anterior: entradas R$ "+tot(pk,"in").toFixed(2)+", saídas R$ "+tot(pk,"out").toFixed(2)+".\n"+
+    (pergunta?"Pergunta da pessoa: "+pergunta+"\n":"")+
+    (pergunta?"\nResponda em português, em texto simples (sem markdown, sem asteriscos), com no máximo 220 palavras. Comece respondendo a meta ou pergunta da pessoa com um plano realista baseado nos dados: quanto guardar por mês, de quais categorias cortar e quanto em cada uma, e em quanto tempo ela chega lá. Termine com um primeiro passo para esta semana. Se a meta parecer inviável com esses números, diga isso com gentileza e proponha um prazo mais realista. Não invente dados que não estão na lista.":
+    "\nResponda em português, em texto simples (sem markdown, sem asteriscos), com no máximo 180 palavras: 1) o que mais pesou no mês; 2) três ações concretas para gastar menos, com valores estimados de economia; 3) uma meta simples para o próximo mês. Não invente dados que não estão na lista.");
+  if(ctl)ctl.abort();ctl=new AbortController();
+  $("iaGo").disabled=true;out.textContent="Analisando seus gastos…";
+  try{
+    await sample(prompt,{signal:ctl.signal,cache:false,onText:r=>{out.textContent=r.text}});
+  }catch(e){
+    if(e&&e.code=="cancelled")return;
+    out.textContent=e&&e.code=="not_granted"?"Você precisa permitir o uso da IA para receber a análise.":
+      e&&e.code=="rate_limited"?"Muitos pedidos seguidos. Tente de novo em alguns minutos.":"Não consegui analisar agora. Tente novamente.";
+  }finally{$("iaGo").disabled=false}
+};
+$("c").onchange=()=>{manual=true};
+$("d").onblur=async()=>{
+  const desc=$("d").value.trim();
+  if(!sample||manual||desc.length<3)return;
+  const t=tipo,lista=CATS[t],sel=$("c");
+  sel.disabled=true;
+  try{
+    const r=await sample.json("Escolha a categoria mais adequada para este lançamento financeiro de uma pessoa no Brasil. Descrição: \""+desc+"\". Tipo: "+(t=="in"?"entrada":"saída")+". Categorias possíveis: "+lista.join(", ")+". Responda somente com JSON no formato {\"categoria\":\"...\"}, usando exatamente um dos nomes da lista.",{modelTier:"quick"});
+    if(!manual&&t==tipo&&r&&lista.includes(r.categoria))sel.value=r.categoria;
+  }catch(e){}
+  finally{sel.disabled=false}
+};
+setTipo("out");render();
+</script>
+</body>
+</html>
